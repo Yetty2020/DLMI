@@ -8,13 +8,26 @@ const sampleDrivers = [
   { id: 1, name: "Yakubu I.", licenseExpiry: "2024-12-25", Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-02-03", SvcNo: "95NA/404992"  },
   { id: 2, name: "Mohammed N.", licenseExpiry: "2028-10-12", Rank: "WO", Deployment: "MT SGT", LicenseNo: "ENU05496AA01", IssuanceDate: "2023-05-22", SvcNo: "96NA/91/4336" },
   { id: 3, name: "Hyelaidaiti N.", licenseExpiry: "2025-10-11", Rank: "WO", Deployment: "MT Yard", LicenseNo: "BNG33284AA02", IssuanceDate: "2023-01-07", SvcNo: "96NA/42/5862" },
-  { id: 4, name: "Fathia Adetoro", licenseExpiry: "2026-08-13", Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-01-13", SvcNo: "97NA/44/4280" },
-  { id: 5, name: "Yanduna Hamisu", licenseExpiry: "2025-06-10",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2022-06-20", SvcNo: "97NA/44/4280" },
-  { id: 6, name: "Lois Emmaeze", licenseExpiry: "2028-03-05",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2023-10-23", SvcNo: "98NA/46/2074" },
-  { id: 7, name: "Mahmud Maikudi", licenseExpiry: "2026-12-12",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-03-17", SvcNo: "01NA/50/658" },
-  { id: 8, name: "Inem Obot", licenseExpiry: "2025-06-10",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-02-09", SvcNo: "02NA/52/5267" },
-  { id: 9, name: "Aliyu Ibrahim", licenseExpiry: "2025-06-13",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2023-09-12", SvcNo: "X10351" },
-  { id: 10, name: "Aminu Salisu", licenseExpiry: "2025-05-27",  Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2024-05-27", SvcNo: "03NA/54/4766" },
+  { id: 4, name: "Taminu C", licenseExpiry: "2026-08-13", Rank: "WO", Deployment: "MT Yard", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-01-13", SvcNo: "97NA/44/4280" },
+  { id: 5, name: "Yakubu A", licenseExpiry: "2025-06-10",  Rank: "SSgt", Deployment: "DOPs DVR", LicenseNo: "ABC59704AD38", IssuanceDate: "2022-06-20", SvcNo: "97NA/44/4280" },
+  { id: 6, name: "Bio L", licenseExpiry: "2028-03-05",  Rank: "SSgt", Deployment: "IMC", LicenseNo: "ABC59704AD38", IssuanceDate: "2023-10-23", SvcNo: "98NA/46/2074" },
+  { id: 7, name: "Ayinde T", licenseExpiry: "2026-12-12",  Rank: "SSgt", Deployment: "DCDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-03-17", SvcNo: "01NA/50/658" },
+  { id: 8, name: "Salisu S", licenseExpiry: "2025-06-10",  Rank: "SSgt", Deployment: "CDI DVR", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-02-09", SvcNo: "02NA/52/5267" },
+  { id: 9, name: "Ibrahim K", licenseExpiry: "2028-10-01",  Rank: "POMTD", Deployment: "DFA", LicenseNo: "ABC59704AD38", IssuanceDate: "2023-09-12", SvcNo: "X10351" },
+  { id: 10, name: "Alex K", licenseExpiry: "2028-03-30",  Rank: "SSgt", Deployment: "CDI Wife", LicenseNo: "ABC59704AD38", IssuanceDate: "2024-05-27", SvcNo: "03NA/54/4766" },
+  { id: 11, name: "Ahmed Ovosi", licenseExpiry: "2025-06-13",  Rank: "DIO III", Deployment: "MT Yard", LicenseNo: "KRV16343AA57", IssuanceDate: "2021-02-24", SvcNo: "DIA/J92/178" },
+  { id: 12, name: "Balogun Tajudeen", licenseExpiry: "2025-05-12",  Rank: "DIO III", Deployment: "MT Yard", LicenseNo: "ABC25317AB03", IssuanceDate: "2023-11-07", SvcNo: "DIA/J92/194" },
+  { id: 13, name: "Michael Sule", licenseExpiry: "2025-05-19",  Rank: "DIO III", Deployment: "DD Budget", LicenseNo: "ABC77394AD38", IssuanceDate: "2021-02-17", SvcNo: "DIA/J10/540" },
+  { id: 14, name: "Rufai AA", licenseExpiry: "2025-05-19",  Rank: "DIO III", Deployment: "D Legal", LicenseNo: "ABC02528AA02", IssuanceDate: "2023-08-25", SvcNo: "DIA/J10/536" },
+  { id: 15, name: "Dahiru H", licenseExpiry: "2025-05-19",  Rank: "ADIO", Deployment: "DFA", LicenseNo: "LFA36116AA1", IssuanceDate: "2022-07-20", SvcNo: "DIA/J10/536" },
+  { id: 16, name: "Precious CA", licenseExpiry: "2025-05-19",  Rank: "ADIO", Deployment: "DMS", LicenseNo: "ABC67017AB02", IssuanceDate: "2023-12-11", SvcNo: "DIA/J13/639" },
+  { id: 17, name: "Sheidu A", licenseExpiry: "2025-06-13",  Rank: "ADIO", Deployment: "DMS", LicenseNo: "ABC27593AD03", IssuanceDate: "2023-05-27", SvcNo: "DIA/J14/652" },
+  { id: 18, name: "Tanko I", licenseExpiry: "2025-05-27",  Rank: "CODI", Deployment: "DMS", LicenseNo: "KLT01536AA95", IssuanceDate: "2023-08-01", SvcNo: "DIA/J20/1010" },
+  { id: 19, name: "Ponfa N", licenseExpiry: "2025-06-13",  Rank: "CODI", Deployment: "MT Yard", LicenseNo: "ABC24287AB28", IssuanceDate: "2023-07-17", SvcNo: "DIA/J21/1079" },
+  { id: 20, name: "Hamza A", licenseExpiry: "2025-05-12",  Rank: "CODI", Deployment: "MT Yard", LicenseNo: "ABC89686AD84", IssuanceDate: "2024-04-08", SvcNo: "DIA/J21/1082" },
+
+
+
  
 ];
 
