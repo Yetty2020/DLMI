@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { format, differenceInDays, parseISO } from "date-fns";
 
 const sampleDrivers = [
-  { id: 1, name: "Yakubu I.", licenseExpiry: "2024-12-25", Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-02-03", SvcNo: "95NA/404992"  },
+ { id: 1, name: "Yakubu I.", licenseExpiry: "2024-12-25", Rank: "MWO", Deployment: "CDI's Office", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-02-03", SvcNo: "95NA/404992"  },
   { id: 2, name: "Mohammed N.", licenseExpiry: "2028-10-12", Rank: "WO", Deployment: "MT SGT", LicenseNo: "ENU05496AA01", IssuanceDate: "2023-05-22", SvcNo: "96NA/91/4336" },
   { id: 3, name: "Hyelaidaiti N.", licenseExpiry: "2025-10-11", Rank: "WO", Deployment: "MT Yard", LicenseNo: "BNG33284AA02", IssuanceDate: "2023-01-07", SvcNo: "96NA/42/5862" },
   { id: 4, name: "Taminu C", licenseExpiry: "2026-08-13", Rank: "WO", Deployment: "MT Yard", LicenseNo: "ABC59704AD38", IssuanceDate: "2021-01-13", SvcNo: "97NA/44/4280" },
@@ -26,9 +26,6 @@ const sampleDrivers = [
   { id: 19, name: "Ponfa N", licenseExpiry: "2025-06-13",  Rank: "CODI", Deployment: "MT Yard", LicenseNo: "ABC24287AB28", IssuanceDate: "2023-07-17", SvcNo: "DIA/J21/1079" },
   { id: 20, name: "Hamza A", licenseExpiry: "2025-05-12",  Rank: "CODI", Deployment: "MT Yard", LicenseNo: "ABC89686AD84", IssuanceDate: "2024-04-08", SvcNo: "DIA/J21/1082" },
 
-
-
- 
 ];
 
 const getAlertLevel = (daysLeft) => {
@@ -38,10 +35,15 @@ const getAlertLevel = (daysLeft) => {
   return null;
 };
 
+const sendAutomatedMessage = (driver) => {
+  console.log(`📢 [DAI] Reminder: License for ${driver.name} expires in ${driver.daysLeft} days!`);
+};
+
 export default function DriverLicenseMonitor() {
   const [drivers, setDrivers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("all");
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     const updatedDrivers = sampleDrivers.map((driver) => {
@@ -53,10 +55,16 @@ export default function DriverLicenseMonitor() {
       const daysLeft = differenceInDays(expiryDate, today);
       const progressPercentage = ((totalValidityDays - daysLeft) / totalValidityDays) * 100;
 
+      const alertLevel = getAlertLevel(daysLeft);
+
+      if ([30, 10, 5].includes(daysLeft)) {
+        sendAutomatedMessage({ ...driver, daysLeft });
+      }
+
       return {
         ...driver,
         daysLeft,
-        alertLevel: getAlertLevel(daysLeft),
+        alertLevel,
         progressPercentage: Math.max(0, Math.min(progressPercentage, 100)),
       };
     });
@@ -79,19 +87,35 @@ export default function DriverLicenseMonitor() {
     return matchesSearch && matchesFilter;
   });
 
-  // const getDaysRemaining = (expiryDate) => {
-  //   const today = new Date();
-  //   const expiry = new Date(expiryDate);
-  //   const diffTime = expiry.getTime() - today.getTime();
-  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  //   return diffDays;
-  // };
+  const handleDAIResponse = (query) => {
+    if (query.includes("expire")) return "Your license expiry info has been displayed.";
+    if (query.includes("renew")) return "Visit https://www.nigeriadriverslicence.org/ to renew.";
+    if (query.includes("nearest")) return "Use Google Maps to find the nearest FRSC office.";
+    return "I'm DAI. Ask me about license status, renewal, or directions.";
+  };
 
   return (
     <div className="p-6 space-y-6">
       <div className="flex gap-x-4 items-center ">
         <img className=" rounded-full w-[8%]" src="https://media.licdn.com/dms/image/v2/D4E22AQFSSnN-YOoCHA/feedshare-shrink_800/feedshare-shrink_800/0/1710951284639?e=2147483647&v=beta&t=G9ExVYnV-bThZsdIF_8Rg_-Wi7nScbiuLYM8sfgeM7w" alt="driver"/>
         <h1 className="text-2xl font-bold mb-4">DOL - Drivers License Monitoring App (DLMA)</h1>
+      </div>
+
+      {/* DAI Chat Assistant */}
+      <div className="fixed bottom-4 right-4">
+        <Button onClick={() => setChatOpen(!chatOpen)} className="bg-blue-500">{chatOpen ? "Close DAI" : "Ask DAI"}</Button>
+        {chatOpen && (
+          <div className="mt-2 p-4 bg-white border rounded shadow-md w-72">
+            <h2 className="font-bold mb-2">Defence Artificial Intelligence (DAI)</h2>
+            <input type="text" placeholder="Ask me anything..." onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const answer = handleDAIResponse(e.target.value.toLowerCase());
+                alert(`DAI: ${answer}`);
+                e.target.value = "";
+              }
+            }} className="border px-2 py-1 rounded w-full" />
+          </div>
+        )}
       </div>
 
       {/* search and filter */}
